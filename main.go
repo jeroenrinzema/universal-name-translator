@@ -16,4 +16,6 @@ func main() {
 
 	result := Klingon.UTF8UnicodeLookup(input)
 	fmt.Println(strings.Join(result, " "))
+
+	LookupCharacterSpecies(input)
 }
