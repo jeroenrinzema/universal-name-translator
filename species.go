@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 
-	"github.com/jeroenrinzema/universal-translator/stapi"
+	"github.com/jeroenrinzema/universal-name-translator/stapi"
 )
 
 // ErrNoSpecies is returned when no species are found for the given character

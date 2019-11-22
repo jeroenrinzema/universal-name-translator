@@ -1,4 +1,4 @@
-# Universal translator
+# Universal name translator
 
 It was supposedly first used in the late 22nd century on Earth for the instant translation of well-known Earth languages. This project tries to extend its capabilities to support alien languages.
 
@@ -16,5 +16,6 @@ Currently, it is only possible to get the binaries from the source. Clone or dow
 Once build you could start translating by executing the CLI and passing the input that you want to be translated as arguments.
 
 ```bash
-$ ./universal-translator Uhura
+$ ./universal-name-translator Uhura
+$ ./universal-name-translator Spock Two
 ```

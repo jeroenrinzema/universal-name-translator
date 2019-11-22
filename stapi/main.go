@@ -15,7 +15,7 @@ type CharacterSpecies []Species
 func (species CharacterSpecies) String() (result string) {
 	for index, species := range species {
 		if index != 0 {
-			result = result + " ,"
+			result = result + ", "
 		}
 
 		result = result + species.Name
