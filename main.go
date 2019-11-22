@@ -2,8 +2,18 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strings"
 )
 
 func main() {
-	fmt.Println(Klingon.UTF8UnicodeLookup("Uhura x"))
+	if len(os.Args) == 1 {
+		return
+	}
+
+	args := os.Args[1:]
+	input := strings.Join(args, " ")
+
+	result := Klingon.UTF8UnicodeLookup(input)
+	fmt.Println(strings.Join(result, " "))
 }
