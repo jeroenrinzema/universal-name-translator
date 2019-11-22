@@ -1,7 +1,62 @@
 package main
 
+import (
+	"strings"
+)
+
 // Characters represents a lookup table of UTF-8 characters and their foreign unicode representative
 type Characters map[string]string
+
+// UTF8UnicodeLookup looks up the unicode character representations of the given UTF-8 string.
+func (characters Characters) UTF8UnicodeLookup(input string) (result []string) {
+	for {
+		match, value := UTF8LookupFirstMatch(input, characters, 0)
+		result = append(result, value)
+		input = input[len(match):]
+
+		if len(input) == 0 {
+			break
+		}
+	}
+
+	return result
+}
+
+// UTF8LookupFirstMatch looks up the first character representation that has the highes match rate
+// for the given input. The matched key and representing value are returned.
+func UTF8LookupFirstMatch(input string, characters Characters, position int) (match string, result string) {
+	matches := Characters{}
+	input = strings.ToLower(input)
+
+	for key, value := range characters {
+		// TODO: in some character sets capitalised letters could represent different characters.
+		// For now we ignore this use case and transform the input and to lower case characters
+		key = strings.ToLower(key)
+
+		if len(key) < position+1 {
+			continue
+		}
+
+		if len(input) < len(key) {
+			continue
+		}
+
+		if string(input[position]) != string(key[position]) {
+			continue
+		}
+
+		matches[key] = value
+
+		match = key
+		result = value
+	}
+
+	if len(matches) > 1 {
+		return UTF8LookupFirstMatch(input, matches, position+1)
+	}
+
+	return match, result
+}
 
 // Klingon holds the klingon alphabet and its UTF-8 representing characters
 var Klingon = Characters{
@@ -43,4 +98,5 @@ var Klingon = Characters{
 	"0":   "0xF8F9",
 	".":   "0xF8FD",
 	",":   "0xF8FE",
+	" ":   "0x0020",
 }

@@ -1,9 +1,9 @@
 package main
 
-import "os"
+import (
+	"fmt"
+)
 
 func main() {
-	input := os.Args[1:]
-
-	
+	fmt.Println(Klingon.UTF8UnicodeLookup("Uhura"))
 }
