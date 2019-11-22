@@ -64,6 +64,10 @@ func UTF8LookupFirstMatch(input string, characters Characters, position int) (ma
 		return UTF8LookupFirstMatch(input, matches, position+1)
 	}
 
+	if match != input[:len(match)] {
+		return "", ""
+	}
+
 	return match, result
 }
 
