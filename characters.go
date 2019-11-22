@@ -11,8 +11,13 @@ type Characters map[string]string
 func (characters Characters) UTF8UnicodeLookup(input string) (result []string) {
 	for {
 		match, value := UTF8LookupFirstMatch(input, characters, 0)
-		result = append(result, value)
-		input = input[len(match):]
+
+		if len(match) > 0 {
+			result = append(result, value)
+			input = input[len(match):]
+		} else {
+			input = input[1:]
+		}
 
 		if len(input) == 0 {
 			break
