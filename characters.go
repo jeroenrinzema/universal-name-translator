@@ -1,0 +1,46 @@
+package main
+
+// Characters represents a lookup table of UTF-8 characters and their foreign unicode representative
+type Characters map[string]string
+
+// Klingon holds the klingon alphabet and its UTF-8 representing characters
+var Klingon = Characters{
+	"a":   "0xF8D0",
+	"b":   "0xF8D1",
+	"ch":  "0xF8D2",
+	"D":   "0xF8D3",
+	"e":   "0xF8D4",
+	"gh":  "0xF8D5",
+	"H":   "0xF8D6",
+	"I":   "0xF8D7",
+	"j":   "0xF8D8",
+	"l":   "0xF8D9",
+	"m":   "0xF8DA",
+	"n":   "0xF8DB",
+	"ng":  "0xF8DC",
+	"o":   "0xF8DD",
+	"p":   "0xF8DE",
+	"q":   "0xF8DF",
+	"Q":   "0xF8E0",
+	"r":   "0xF8E1",
+	"S":   "0xF8E2",
+	"t":   "0xF8E3",
+	"tlh": "0xF8E4",
+	"u":   "0xF8E5",
+	"v":   "0xF8E6",
+	"w":   "0xF8E7",
+	"y":   "0xF8E8",
+	"'":   "0xF8E9",
+	"1":   "0xF8F0",
+	"2":   "0xF8F1",
+	"3":   "0xF8F2",
+	"4":   "0xF8F3",
+	"5":   "0xF8F4",
+	"6":   "0xF8F5",
+	"7":   "0xF8F6",
+	"8":   "0xF8F7",
+	"9":   "0xF8F8",
+	"0":   "0xF8F9",
+	".":   "0xF8FD",
+	",":   "0xF8FE",
+}
