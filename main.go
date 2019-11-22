@@ -17,5 +17,11 @@ func main() {
 	result := Klingon.UTF8UnicodeLookup(input)
 	fmt.Println(strings.Join(result, " "))
 
-	LookupCharacterSpecies(input)
+	species, err := LookupCharacterSpecies(input)
+	if err != nil {
+		fmt.Println("unable to lookup species.")
+		return
+	}
+
+	fmt.Println(species)
 }
