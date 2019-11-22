@@ -14,9 +14,9 @@ type Characters map[string]string
 // UTF8UnicodeLookup looks up the unicode character representations of the given UTF-8 string.
 func (characters Characters) UTF8UnicodeLookup(input string) (result []string, err error) {
 	for {
-		match, value := UTF8LookupFirstMatch(input, characters, 0)
+		match, value := UTF8LookupFirstMatch(input, characters)
 
-		if len(match) == 0 {
+		if match == "" {
 			return nil, ErrUntranslatableCharacters
 		}
 
@@ -33,39 +33,31 @@ func (characters Characters) UTF8UnicodeLookup(input string) (result []string, e
 
 // UTF8LookupFirstMatch looks up the first character representation that has the highes match rate
 // for the given input. The matched key and representing value are returned.
-func UTF8LookupFirstMatch(input string, characters Characters, position int) (match string, result string) {
-	matches := Characters{}
+func UTF8LookupFirstMatch(input string, characters Characters) (match string, result string) {
 	input = strings.ToLower(input)
 
+lookup:
 	for key, value := range characters {
 		// TODO: in some character sets capitalised letters could represent different characters.
 		// For now we ignore this use case and transform the input and to lower case characters
 		key = strings.ToLower(key)
 
-		if len(key) < position+1 {
-			continue
-		}
-
 		if len(input) < len(key) {
 			continue
 		}
 
-		if string(input[position]) != string(key[position]) {
+		for pos, char := range key {
+			if string(input[pos]) != string(char) {
+				continue lookup
+			}
+		}
+
+		if len(key) < len(match) {
 			continue
 		}
 
-		matches[key] = value
-
 		match = key
 		result = value
-	}
-
-	if len(matches) > 1 {
-		return UTF8LookupFirstMatch(input, matches, position+1)
-	}
-
-	if match != input[:len(match)] {
-		return "", ""
 	}
 
 	return match, result

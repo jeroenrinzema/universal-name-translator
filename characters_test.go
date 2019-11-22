@@ -38,7 +38,7 @@ func TestUTF8LookupFirstMatch(t *testing.T) {
 		characters[value] = value
 	}
 
-	match, _ := UTF8LookupFirstMatch(input, characters, 0)
+	match, _ := UTF8LookupFirstMatch(input, characters)
 	if match != input {
 		t.Errorf("Unexpected result returned. Expected: %s, received %s\n", input, match)
 	}
