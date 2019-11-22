@@ -1,30 +1,34 @@
 package main
 
 import (
+	"errors"
 	"strings"
 )
+
+// ErrUntranslatableCharacters is returned when a untranslatable character is encountered
+var ErrUntranslatableCharacters = errors.New("untranslatable characters encountered")
 
 // Characters represents a lookup table of UTF-8 characters and their foreign unicode representative
 type Characters map[string]string
 
 // UTF8UnicodeLookup looks up the unicode character representations of the given UTF-8 string.
-func (characters Characters) UTF8UnicodeLookup(input string) (result []string) {
+func (characters Characters) UTF8UnicodeLookup(input string) (result []string, err error) {
 	for {
 		match, value := UTF8LookupFirstMatch(input, characters, 0)
 
-		if len(match) > 0 {
-			result = append(result, value)
-			input = input[len(match):]
-		} else {
-			input = input[1:]
+		if len(match) == 0 {
+			return nil, ErrUntranslatableCharacters
 		}
+
+		result = append(result, value)
+		input = input[len(match):]
 
 		if len(input) == 0 {
 			break
 		}
 	}
 
-	return result
+	return result, nil
 }
 
 // UTF8LookupFirstMatch looks up the first character representation that has the highes match rate

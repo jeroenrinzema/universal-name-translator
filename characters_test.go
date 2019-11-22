@@ -16,7 +16,7 @@ func TestUTF8UnicodeLookup(t *testing.T) {
 		characters[value] = value
 	}
 
-	result := characters.UTF8UnicodeLookup(expected)
+	result, _ := characters.UTF8UnicodeLookup(expected)
 	if len(result) > 1 {
 		t.Error("Multiple results are returned when one is expected")
 	}
